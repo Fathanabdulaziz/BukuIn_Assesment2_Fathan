@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">BukuIn_Assesment2_Fathan</string>
+    <string name="app_name">Buku.In</string>
+    <string name="list_kosong">Belum ada data</string>
+    <string name="x_diklik">%1$s diklik!</string>
+    <string name="tambah_catatan">Tambah catatan</string>
+    <string name="belum_bisa">Belum bisa Tambbah catatan.</string>
 </resources>
