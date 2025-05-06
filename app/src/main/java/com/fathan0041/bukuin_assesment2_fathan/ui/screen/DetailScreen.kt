@@ -43,12 +43,17 @@ const val  KEY_ID_CATATAN ="idCatatan"
 fun DetailScreen(navController: NavHostController, id: Long? = null){
     val viewModel: MainViewModel = viewModel()
     var  judulBuku by remember { mutableStateOf("") }
+    var  kategori by remember { mutableStateOf("") }
+    var harga by remember { mutableStateOf("") }
     var  catatan by remember { mutableStateOf("") }
+
 
     LaunchedEffect(Unit) {
         if (id == null) return@LaunchedEffect
         val data = viewModel.getListBuku(id) ?: return@LaunchedEffect
         judulBuku = data.judulBuku
+        kategori = data.kategori
+        harga = data.harga
         catatan = data.catatan
     }
     Scaffold(
@@ -90,6 +95,10 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
             onTitleChange = {judulBuku = it},
             desc = catatan,
             onDescChange = {catatan = it},
+            kategori = kategori,
+            onKategori = {kategori = it},
+            harga = harga,
+            onHarga = {harga=it},
             modifier = Modifier.padding(padding)
         )
 
@@ -99,7 +108,9 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
 @Composable
 fun FormCatatan(
     title: String, onTitleChange: (String) -> Unit,
+    kategori: String, onKategori: (String) -> Unit,
     desc: String, onDescChange: (String) -> Unit,
+    harga: String, onHarga: (String) -> Unit,
     modifier: Modifier
 ){
     Column (
@@ -118,6 +129,24 @@ fun FormCatatan(
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
+            value = kategori,
+            onValueChange = { onKategori(it)},
+            label = { Text(text = stringResource(R.string.isi_catatan)) },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = harga,
+            onValueChange = { onHarga(it)},
+            label = { Text(text = stringResource(R.string.isi_catatan)) },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
             value = desc,
             onValueChange = { onDescChange(it)},
             label = { Text(text = stringResource(R.string.isi_catatan)) },
@@ -125,6 +154,7 @@ fun FormCatatan(
                 capitalization = KeyboardCapitalization.Sentences
             ),
             modifier = Modifier.fillMaxSize()
+
         )
     }
 }

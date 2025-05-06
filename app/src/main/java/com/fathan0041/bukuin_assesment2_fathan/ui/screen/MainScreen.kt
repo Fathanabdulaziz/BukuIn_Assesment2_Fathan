@@ -124,12 +124,12 @@ fun ListItem(listBuku: ListBuku, onClick: () -> Unit){
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = listBuku.catatan,
+            text = listBuku.harga,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = listBuku.harga,
+            text = listBuku.catatan,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
