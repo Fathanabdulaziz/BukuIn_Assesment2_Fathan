@@ -2,15 +2,21 @@ package com.fathan0041.bukuin_assesment2_fathan.ui.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +28,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -116,6 +123,9 @@ fun FormCatatan(
     modifier: Modifier
 ){
     val hargaError by remember { mutableStateOf(false) }
+    val list = kategoriList()
+    val selectedList = remember { mutableStateListOf<String>() }
+
     Column (
         modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -133,12 +143,40 @@ fun FormCatatan(
         )
         OutlinedTextField(
             value = kategori,
-            onValueChange = { onKategori(it)},
-            label = { Text(text = stringResource(R.string.isi_catatan)) },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences
-            ),
-            modifier = Modifier.fillMaxWidth()
+            onValueChange = { },
+            readOnly = true,
+            enabled = false,
+            label = { Text(text = stringResource(R.string.kategori)) },
+            modifier = Modifier.fillMaxWidth(),
+            supportingText = {
+                Box(
+                    modifier = Modifier
+                        .heightIn(max = 180.dp)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        maxItemsInEachRow = 3
+                    ) {
+                        list.forEach {
+                            FilterChip(
+                                modifier = Modifier.padding(4.dp),
+                                selected = it in selectedList,
+                                onClick = {
+                                    if (it in selectedList) {
+                                        selectedList.remove(it)
+                                    } else {
+                                        selectedList.clear()
+                                        selectedList.add(it)
+                                    }
+                                    onKategori(selectedList.joinToString())
+                                },
+                                label = { Text(text = it) }
+                            )
+                        }
+                    }
+                }
+            }
         )
         OutlinedTextField(
             value = harga,
@@ -177,6 +215,18 @@ fun ErrorHint (isError: Boolean){
     if (isError){
         Text(text = stringResource(R.string.input_invalid))
     }
+}
+
+@Composable
+fun kategoriList(): List<String> {
+    return listOf(
+        "Fantasy", " Science Fiction", "Dystopian",
+        "Action & Adventure", "Detective & Mystery", "Thriller & Suspense",
+        "Romance", "Horror", "Historical Fiction", "Contemporary Fiction",
+        "Graphic Novels", "Biography", "History", "True Crime",
+        "Science & Technology"
+
+        )
 }
 
 @Preview(showBackground = true)
