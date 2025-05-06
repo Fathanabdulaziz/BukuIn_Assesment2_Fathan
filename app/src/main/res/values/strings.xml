@@ -4,4 +4,11 @@
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_catatan">Tambah catatan</string>
     <string name="belum_bisa">Belum bisa Tambbah catatan.</string>
+    <string name="judul">Judul Buku</string>
+    <string name="isi_catatan">Isi Sinopsis</string>
+    <string name="harga">Harga</string>
+    <string name="Kategori">Kategori</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+    <string name="edit_catatan">Ubah catatan</string>
 </resources>

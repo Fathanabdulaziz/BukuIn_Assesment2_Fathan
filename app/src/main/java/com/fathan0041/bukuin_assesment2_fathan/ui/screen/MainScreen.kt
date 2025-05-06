@@ -32,13 +32,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.fathan0041.bukuin_assesment2_fathan.R
 import com.fathan0041.bukuin_assesment2_fathan.model.ListBuku
+import com.fathan0041.bukuin_assesment2_fathan.navigation.Screen
 import com.fathan0041.bukuin_assesment2_fathan.ui.theme.BukuIn_Assesment2_FathanTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(){
+fun MainScreen(navController: NavHostController){
     val context = LocalContext.current
     Scaffold(
         topBar = {
@@ -66,15 +69,15 @@ fun MainScreen(){
             }
         }
     ) { innerPadding ->
-        ScreenContent(Modifier.padding(innerPadding))
+        ScreenContent(Modifier.padding(innerPadding), navController)
     }
 }
 
 @Composable
-fun ScreenContent (modifier: Modifier = Modifier){
+fun ScreenContent (modifier: Modifier = Modifier, navController: NavHostController){
     val viewModel: MainViewModel = viewModel()
     val data = viewModel.data
-    val context = LocalContext.current
+
 
     if (data.isEmpty()){
         Column (
@@ -94,8 +97,7 @@ fun ScreenContent (modifier: Modifier = Modifier){
         ){
             items(data){
                 ListItem(listBuku = it){
-                    val pesan = context.getString(R.string.x_diklik,it.judulBuku)
-                    Toast.makeText(context,pesan, Toast.LENGTH_SHORT).show()
+                    navController.navigate(Screen.FormUbah.withId(it.id))
                 }
                 HorizontalDivider()
             }
@@ -118,17 +120,17 @@ fun ListItem(listBuku: ListBuku, onClick: () -> Unit){
         )
         Text(
             text = listBuku.kategori,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
         Text(
             text = listBuku.catatan,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
         Text(
             text = listBuku.harga,
-            maxLines = 2,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
         Text(
@@ -143,6 +145,6 @@ fun ListItem(listBuku: ListBuku, onClick: () -> Unit){
 @Composable
 fun MainScreenPreview() {
     BukuIn_Assesment2_FathanTheme{
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

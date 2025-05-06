@@ -9,7 +9,7 @@ class MainViewModel: ViewModel(){
             1,
             "Kuliah Mobpro 17 Feb",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-02-17 12:34:56"
         ),
@@ -17,7 +17,7 @@ class MainViewModel: ViewModel(){
             2,
             "Kuliah Mobpro 19 Feb",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-02-19 12:34:56"
         ),
@@ -25,7 +25,7 @@ class MainViewModel: ViewModel(){
             3,
             "Kuliah Mobpro 24 Feb",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-02-24 12:34:56"
         ),
@@ -33,7 +33,7 @@ class MainViewModel: ViewModel(){
             4,
             "Kuliah Mobpro 26 Feb",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-02-26 12:34:56"
         ),
@@ -41,7 +41,7 @@ class MainViewModel: ViewModel(){
             5,
             "Kuliah Mobpro 03 Mar",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-03-03 12:34:56"
         ),
@@ -49,9 +49,12 @@ class MainViewModel: ViewModel(){
             6,
             "Kuliah Mobpro 05 Mar",
             "akademi",
-            " Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
+            "Kuliah hari pertama. Ternyata keren juga yang mau dipelajari. ",
             "Rp 100000",
             "2025-03-05 12:34:56"
         )
     )
+    fun getListBuku(id: Long): ListBuku?{
+        return data.find { it.id == id }
+    }
 }
