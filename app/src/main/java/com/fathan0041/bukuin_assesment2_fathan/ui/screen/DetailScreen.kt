@@ -36,6 +36,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.fathan0041.bukuin_assesment2_fathan.R
 import com.fathan0041.bukuin_assesment2_fathan.ui.theme.BukuIn_Assesment2_FathanTheme
+import java.text.NumberFormat
+import java.util.Locale
 
 const val  KEY_ID_CATATAN ="idCatatan"
 @OptIn(ExperimentalMaterial3Api::class)
@@ -113,6 +115,7 @@ fun FormCatatan(
     harga: String, onHarga: (String) -> Unit,
     modifier: Modifier
 ){
+    val hargaError by remember { mutableStateOf(false) }
     Column (
         modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -141,9 +144,15 @@ fun FormCatatan(
             value = harga,
             onValueChange = { onHarga(it)},
             label = { Text(text = stringResource(R.string.isi_catatan)) },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences
-            ),
+            leadingIcon = { Text(text = "Rp") },
+            supportingText = {
+                Column {
+                    ErrorHint(hargaError)
+                    if (harga.toFloatOrNull() != null) {
+                        Text("Target: Rp ${formatNumber(harga.toFloat())}")
+                    }
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
@@ -156,6 +165,17 @@ fun FormCatatan(
             modifier = Modifier.fillMaxSize()
 
         )
+    }
+}
+
+fun formatNumber(number: Float): String {
+    val formatter = NumberFormat.getInstance(Locale("id", "ID"))
+    return formatter.format(number)
+}
+@Composable
+fun ErrorHint (isError: Boolean){
+    if (isError){
+        Text(text = stringResource(R.string.input_invalid))
     }
 }
 

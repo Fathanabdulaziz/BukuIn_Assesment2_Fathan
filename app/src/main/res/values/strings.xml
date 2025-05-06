@@ -11,4 +11,5 @@
     <string name="kembali">Kembali</string>
     <string name="simpan">Simpan</string>
     <string name="edit_catatan">Ubah catatan</string>
+    <string name="input_invalid">Input Invalid.</string>
 </resources>
