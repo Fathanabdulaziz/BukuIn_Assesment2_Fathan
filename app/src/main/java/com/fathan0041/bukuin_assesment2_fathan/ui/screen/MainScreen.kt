@@ -1,6 +1,7 @@
 package com.fathan0041.bukuin_assesment2_fathan.ui.screen
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,8 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -25,9 +32,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,12 +48,17 @@ import com.fathan0041.bukuin_assesment2_fathan.R
 import com.fathan0041.bukuin_assesment2_fathan.model.ListBuku
 import com.fathan0041.bukuin_assesment2_fathan.navigation.Screen
 import com.fathan0041.bukuin_assesment2_fathan.ui.theme.BukuIn_Assesment2_FathanTheme
+import com.fathan0041.bukuin_assesment2_fathan.util.SettingsDataStore
 import com.fathan0041.bukuin_assesment2_fathan.util.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController){
-    var showList by remember { mutableStateOf(true) }
+    val dataStore = SettingsDataStore(LocalContext.current)
+    val showList by dataStore.layoutFlow.collectAsState(true)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -61,7 +70,11 @@ fun MainScreen(navController: NavHostController){
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 actions = {
-                    IconButton(onClick = {showList = !showList}) {
+                    IconButton(onClick = {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            dataStore.saveLayout(!showList)
+                        }
+                    }) {
                         Icon(
                             painter = painterResource(
                                 if (showList) R.drawable.baseline_view_list_24
@@ -91,12 +104,12 @@ fun MainScreen(navController: NavHostController){
             }
         }
     ) { innerPadding ->
-        ScreenContent(Modifier.padding(innerPadding), navController)
+        ScreenContent(showList,Modifier.padding(innerPadding), navController)
     }
 }
 
 @Composable
-fun ScreenContent (modifier: Modifier = Modifier, navController: NavHostController){
+fun ScreenContent (showList: Boolean, modifier: Modifier = Modifier, navController: NavHostController){
     val context = LocalContext.current
     val factory = ViewModelFactory(context)
     val viewModel: MainViewModel = viewModel(factory = factory)
@@ -115,6 +128,7 @@ fun ScreenContent (modifier: Modifier = Modifier, navController: NavHostControll
         }
     }
     else {
+        if (showList){
         LazyColumn (
             modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(bottom = 84.dp)
@@ -124,6 +138,21 @@ fun ScreenContent (modifier: Modifier = Modifier, navController: NavHostControll
                     navController.navigate(Screen.FormUbah.withId(it.id))
                 }
                 HorizontalDivider()
+            }
+        }
+    }else{
+            LazyVerticalStaggeredGrid(
+                modifier = modifier.fillMaxSize(),
+                columns = StaggeredGridCells.Fixed(2),
+                verticalItemSpacing = 8.dp,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(8.dp,8.dp,8.dp,84.dp)
+            ) {
+                items(data){
+                    GridItem(listBuku = it) {
+                        navController.navigate(Screen.FormUbah.withId(it.id))
+                    }
+                }
             }
         }
     }
@@ -162,6 +191,47 @@ fun ListItem(listBuku: ListBuku, onClick: () -> Unit){
         )
     }
 }
+@Composable
+fun GridItem(listBuku: ListBuku, onClick: () -> Unit){
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        border = BorderStroke(1.dp, DividerDefaults.color)
+    ) {
+        Column (
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ){
+            Text(
+                text = listBuku.judulBuku,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = listBuku.kategori,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = listBuku.harga,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = listBuku.catatan,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = listBuku.tanggal
+            )
+        }
+    }
+}
+
 
 
 
