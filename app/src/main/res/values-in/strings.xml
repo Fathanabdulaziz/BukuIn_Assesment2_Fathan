@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Buku.In</string>
+    <string name="list_kosong">Belum ada data</string>
+    <string name="x_diklik">%1$s diklik!</string>
+    <string name="tambah_catatan">Tambah catatan</string>
+    <string name="belum_bisa">Belum bisa Tambbah catatan.</string>
+    <string name="judul">Judul Buku</string>
+    <string name="isi_catatan">Isi Sinopsis</string>
+    <string name="harga">Harga</string>
+    <string name="kategori">Kategori</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+    <string name="edit_catatan">Ubah catatan</string>
+    <string name="edit">Ubah catatan</string>
+    <string name="input_invalid">Input Invalid.</string>
+    <string name="invalid">Judul dan isi catatan tidak boleh kosong</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus catatan</string>
+    <string name="pesan_hapus">Hapus catatan ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
+    <string name="list">Tampilan List</string>
+    <string name="grid">Tampilan Grid</string>
+    <string name="detail_catatan">Deskripsi</string>
+    <string name="label_judul_buku">%1$s</string>
+    <string name="label_kategori">%1$s</string>
+    <string name="label_harga">Rp %1$s</string>
+    <string name="label_catatan">Sinopsis:\n%1$s</string>
+</resources>

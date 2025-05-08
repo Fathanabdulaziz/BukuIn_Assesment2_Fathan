@@ -29,7 +29,7 @@ class DetailViewModel (private val dao:ListBukuDao): ViewModel(){
         return dao.getListBukuById(id)
     }
 
-    fun update (id: Long, judulBuku: String,harga: String,kategori: String, isi: String){
+    fun update (id: Long, judulBuku: String,kategori: String,harga: String, isi: String){
         val listBuku = ListBuku(
             id = id,
             tanggal = formatter.format(Date()),

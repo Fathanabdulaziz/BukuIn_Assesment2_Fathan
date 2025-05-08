@@ -1,24 +1,31 @@
 <resources>
     <string name="app_name">Buku.In</string>
-    <string name="list_kosong">Belum ada data</string>
-    <string name="x_diklik">%1$s diklik!</string>
-    <string name="tambah_catatan">Tambah catatan</string>
-    <string name="belum_bisa">Belum bisa Tambbah catatan.</string>
-    <string name="judul">Judul Buku</string>
-    <string name="isi_catatan">Isi Sinopsis</string>
-    <string name="harga">Harga</string>
-    <string name="kategori">Kategori</string>
-    <string name="kembali">Kembali</string>
-    <string name="simpan">Simpan</string>
-    <string name="edit_catatan">Ubah catatan</string>
-    <string name="input_invalid">Input Invalid.</string>
-    <string name="invalid">Judul dan isi catatan tidak boleh kosong</string>
-    <string name="lainnya">Opsi lainnya</string>
-    <string name="hapus">Hapus catatan</string>
-    <string name="pesan_hapus">Hapus catatan ini?</string>
-    <string name="tombol_hapus">Hapus</string>
-    <string name="tombol_batal">Batal</string>
-    <string name="list">Tampilan List</string>
-    <string name="grid">Tampilan Grid</string>
+    <string name="list_kosong">There is no data yet</string>
+    <string name="x_diklik">%1$s click-it!</string>
+    <string name="tambah_catatan">Add Book</string>
+    <string name="belum_bisa">Adding a book doesnt work yet</string>
+    <string name="judul">Tittle Book</string>
+    <string name="isi_catatan">Synopsis Content</string>
+    <string name="harga">Price</string>
+    <string name="kategori">Category</string>
+    <string name="kembali">Back</string>
+    <string name="simpan">Save</string>
+    <string name="edit_catatan">Edit List</string>
+    <string name="edit">Edit List</string>
+    <string name="input_invalid">Invalid input.</string>
+    <string name="invalid">Title and content must not be empty</string>
+    <string name="lainnya">More options</string>
+    <string name="hapus">Delete note</string>
+    <string name="pesan_hapus">Delete this note?</string>
+    <string name="tombol_hapus">Delete</string>
+    <string name="tombol_batal">Cancel</string>
+    <string name="list">List View</string>
+    <string name="grid">Grid View</string>
+    <string name="detail_catatan">Description</string>
+    <string name="label_judul_buku">%1$s</string>
+    <string name="label_kategori">%1$s</string>
+    <string name="label_harga">Rp %1$s</string>
+    <string name="label_catatan">Synopsis:\n%1$s</string>
+
 
 </resources>

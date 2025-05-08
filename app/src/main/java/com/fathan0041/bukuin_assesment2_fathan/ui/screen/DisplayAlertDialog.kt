@@ -36,7 +36,7 @@ fun DisplayAlertDialog(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun DialogPreview() {
-    BukuIn_Assesment2_FathanTheme {
+    BukuIn_Assesment2_FathanTheme(themeId = 0) {
         DisplayAlertDialog(
             onDismissRequest = {},
             onConfirmation = {}
