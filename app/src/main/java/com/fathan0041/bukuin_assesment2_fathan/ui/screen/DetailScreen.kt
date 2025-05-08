@@ -61,6 +61,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
     val factory = ViewModelFactory(context)
     val viewModel: DetailViewModel = viewModel(factory = factory)
 
+    var showDialog by remember { mutableStateOf(false) }
     var  judulBuku by remember { mutableStateOf("") }
     var  kategori by remember { mutableStateOf("") }
     var harga by remember { mutableStateOf("") }
@@ -116,8 +117,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
                 }
                     if (id != null){
                         DeleteAction {
-                            viewModel.delete(id)
-                            navController.popBackStack()
+                            showDialog = true
                         }
                     }
                 }
@@ -135,6 +135,14 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
             onHarga = {harga=it},
             modifier = Modifier.padding(padding)
         )
+        if (id != null && showDialog){
+            DisplayAlertDialog(
+                onDismissRequest = { showDialog = false}) {
+                showDialog = false
+                viewModel.delete(id)
+                navController.popBackStack()
+            }
+        }
 
     }
 }
