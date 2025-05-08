@@ -243,12 +243,20 @@ fun ErrorHint (isError: Boolean){
 @Composable
 fun kategoriList(): List<String> {
     return listOf(
-        "Fantasy", " Science Fiction", "Dystopian",
-        "Action & Adventure", "Detective & Mystery", "Thriller & Suspense",
-        "Romance", "Horror", "Historical Fiction", "Contemporary Fiction",
-        "Graphic Novels", "Biography", "History", "True Crime",
-        "Science & Technology"
-
+        "Fiction", "Non-Fiction", "Fantasy", "Science Fiction", "Horror",
+        "Thriller", "Mystery", "Drama", "Romance", "Adventure",
+        "Historical Fiction", "Biography", "Autobiography", "Memoir", "Poetry",
+        "Essay", "Satire", "Dystopian", "Utopian", "Paranormal",
+        "Detective", "Crime", "Political Fiction", "Religious Fiction", "Inspirational",
+        "Psychology", "Self-Help", "Spiritual", "Philosophy", "Science",
+        "Technology", "Economics", "Business", "Leadership", "Parenting",
+        "Education", "Children's Books", "Young Adult", "Board Books",
+        "Comics", "Manga", "Graphic Novels", "Folklore", "Mythology",
+        "Legends", "Cookbooks", "Travel", "Art & Design", "Music", "Photography",
+        "Cyberpunk", "Steampunk", "Urban Fantasy", "Dark Fantasy", "Space Opera",
+        "Magical Realism", "Time Travel", "Coming of Age", "Western", "LGBTQ+ Fiction",
+        "Medical Fiction", "War Fiction", "Chick Lit", "Sports Fiction", "GameLit / LitRPG",
+        "Short Stories", "Epistolary", "Fairytale Retellings", "Animal Fiction", "Survival Fiction"
         )
 }
 
